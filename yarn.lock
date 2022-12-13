@@ -240,7 +240,7 @@
   resolved "https://registry.yarnpkg.com/@oclif/screen/-/screen-3.0.3.tgz#e679ad10535e31d333f809f7a71335cc9aef1e55"
   integrity sha512-KX8gMYA9ujBPOd1HFsV9e0iEx7Uoj8AG/3YsW4TtWQTg4lJvr82qNm7o/cFQfYRIt+jw7Ew/4oL4A22zOT+IRA==
 
-"@shopify/app@^3.25.0":
+"@shopify/app@3.25.0":
   version "3.25.0"
   resolved "https://registry.yarnpkg.com/@shopify/app/-/app-3.25.0.tgz#0cacc2c858515f33763616d88ddcdff5983a1e07"
   integrity sha512-ORVQU3femJA7HmyGUgusLZbj50uokFlGENsge89/Sm31iwcRaFavp1Qo6LlLm52fbG0Fj5ynUFUXqQt4kmML1w==
@@ -322,7 +322,7 @@
     unique-string "3.0.0"
     zod "3.17.3"
 
-"@shopify/cli@^3.25.0":
+"@shopify/cli@3.25.0":
   version "3.25.0"
   resolved "https://registry.yarnpkg.com/@shopify/cli/-/cli-3.25.0.tgz#a746e105a3e8317f34c11e477bd651337a0548c3"
   integrity sha512-nKh9BF+sxj4K0a+T5dpPs72YAV4bwBINeMrMp+7rshVh9GE/YwKheb0GM6jzD6GFvMAJ47jBAUQmBPvXpVWNBA==
