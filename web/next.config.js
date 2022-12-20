@@ -4,6 +4,7 @@ const nextConfig = {
   swcMinify: true,
   experimental: {
     allowMiddlewareResponseBody: true,
+    appDir: true,
   },
 };
 
