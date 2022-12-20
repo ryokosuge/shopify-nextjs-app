@@ -9,16 +9,23 @@ export const config = {
      * - _next/static (static files)
      * - favicon.ico (favicon file)
      */
-    "/((?!api|_next/static|favicon.ico).*)",
+    "/((?!api|_next/static|favicon.ico|vercel.svg).*)",
   ],
 };
 
 export const middleware = async (request: NextRequest) => {
   const url = request.nextUrl.clone();
   console.info(JSON.stringify({ url }, null, 4));
-  const shop = url.searchParams.get("shop") ?? "";
+  const myshopifyDomain = url.searchParams.get("shop") ?? "";
   const host = url.searchParams.get("host") ?? "";
-  console.info(JSON.stringify({ shop }, null, 4));
+  console.info(JSON.stringify({ myshopifyDomain, host }, null, 4));
+
+  const accessToken = request.cookies.get("access_token")?.value;
+  if (accessToken != null) {
+    console.info(JSON.stringify({ accessToken }, null, 4));
+    const res = NextResponse.next();
+    return res;
+  }
 
   const { SHOPIFY_API_KEY, SHOPIFY_API_SECRET, SCOPES, APP_URL } = process.env;
   const oauthMiddleware = new OAuthMiddleware({
@@ -31,17 +38,19 @@ export const middleware = async (request: NextRequest) => {
   try {
     const result = await oauthMiddleware.authenticate(request);
     console.info(JSON.stringify(result, null, 4));
+
+    const redirectURL = new URL("/", url);
+    redirectURL.searchParams.append("shop", myshopifyDomain);
+    redirectURL.searchParams.append("host", host);
+    const res = NextResponse.redirect(redirectURL);
+    res.cookies.set("access_token", result.accessToken);
+    res.cookies.delete("state");
+    return res;
   } catch (err) {
+    console.error(err);
     if (err instanceof NextResponse) {
-      console.error(err);
       return err;
     }
+    throw err;
   }
-
-  const redirectURL = new URL("/", url);
-  redirectURL.searchParams.append("shop", shop);
-  redirectURL.searchParams.append("host", host);
-  const res = NextResponse.redirect(redirectURL);
-  res.cookies.delete("state");
-  return res;
 };
