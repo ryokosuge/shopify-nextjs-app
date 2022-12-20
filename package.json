@@ -10,7 +10,7 @@
     "shopify": "shopify"
   },
   "devDependencies": {
-    "@shopify/app": "3.25.0",
-    "@shopify/cli": "3.25.0"
+    "@shopify/app": "3.28.0",
+    "@shopify/cli": "3.28.0"
   }
 }
